@@ -3,14 +3,21 @@ from unittest.mock import mock_open, patch
 from src.utils import reading_json_file
 
 
-@patch("builtins.open", new_callable=mock_open,
-       read_data='''[{"user_currencies": ["USD", "EUR"],
-  "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]}]''')
+@patch(
+    "builtins.open",
+    new_callable=mock_open,
+    read_data="""[{"user_currencies": ["USD", "EUR"],
+  "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]}]""",
+)
 def test_valid_reading_json_file(mock_file: str) -> None:
     """Функция тестирует reading_json_file from src.utils на корректный файл с транзакциями"""
     transactions = reading_json_file("user_settings.json")
-    assert transactions == [{"user_currencies": ["USD", "EUR"],
-                             "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]}]
+    assert transactions == [
+        {
+            "user_currencies": ["USD", "EUR"],
+            "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"],
+        }
+    ]
 
 
 @patch("builtins.open", new_callable=mock_open, read_data='{"amount": 100}')

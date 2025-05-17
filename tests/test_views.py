@@ -16,23 +16,41 @@ from src.views import each_card, greetings, top_transactions
     ],
 )
 @patch("src.views.datetime")
-def test_get_greeting(mocked_datetime, now_datetime, expected_greeting):
+def test_get_greeting(mocked_datetime, now_datetime, expected_greeting) -> None:
     mocked_datetime.now.return_value = now_datetime
     assert greetings() == expected_greeting
 
 
-def test_top_transactions():
-    expected = [{'date': '01.02.2021', 'amount': 357.96,
-                 'category': 'Супермаркеты', 'description': 'Магнит'},
-                {'date': '01.02.2021', 'amount': 99.0, 'category': 'Фастфуд',
-                 'description': 'Pingvin Kofe I Chaj'},
-                {'date': '01.02.2021', 'amount': 96.0, 'category': 'Супермаркеты',
-                 'description': 'Колхоз'},
-                {'date': '01.02.2021', 'amount': 30.0,
-                 'category': 'Связь', 'description': 'Devajs Servis.'}]
-    assert top_transactions('data/operations.xlsx', '02.02.2021') == expected
+def test_top_transactions() -> None:
+    expected = [
+        {
+            "date": "01.02.2021",
+            "amount": 357.96,
+            "category": "Супермаркеты",
+            "description": "Магнит",
+        },
+        {
+            "date": "01.02.2021",
+            "amount": 99.0,
+            "category": "Фастфуд",
+            "description": "Pingvin Kofe I Chaj",
+        },
+        {
+            "date": "01.02.2021",
+            "amount": 96.0,
+            "category": "Супермаркеты",
+            "description": "Колхоз",
+        },
+        {
+            "date": "01.02.2021",
+            "amount": 30.0,
+            "category": "Связь",
+            "description": "Devajs Servis.",
+        },
+    ]
+    assert top_transactions("data/operations.xlsx", "02.02.2021") == expected
 
 
-def test_each_card():
-    expected = [{'last_digits': '7197', 'total_spent': 582.96, 'cashback': 5.83}]
-    assert each_card('data/operations.xlsx', '02.02.2021') == expected
+def test_each_card() -> None:
+    expected = [{"last_digits": "7197", "total_spent": 582.96, "cashback": 5.83}]
+    assert each_card("data/operations.xlsx", "02.02.2021") == expected
