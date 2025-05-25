@@ -1,5 +1,7 @@
-from api_client import HH, Vacancy
+# main.py
+from api_client import HH
 from storage import JSONStorage
+from vacancy import Vacancy  # Теперь импорт из vacancy.py
 
 
 def get_user_input(prompt, convert_func=str):
@@ -29,6 +31,7 @@ def search_vacancies():
         print("По вашему запросу вакансий не найдено.")
         return
 
+    # Преобразуем вакансии в объекты Vacancy
     vacancy_objects = []
     for item in hh.vacancies:
         vacancy = Vacancy(

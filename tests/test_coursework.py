@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch, Mock
-from src.api_client import HH, Vacancy
+from src.api_client import HH
+from src.vacancy import Vacancy
 from src.storage import JSONStorage
 import tempfile
 import json
